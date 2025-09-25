@@ -33,9 +33,9 @@ Task | Notes | Resolved?
 Set up new Raspberry Pi | - | ✅
 Set up Python environment | - | ✅
 Order new RPi power supply | undervoltage still potentially an issue? at least `dmesg` indicates the voltage gets normalized (like the other one, and that one runs without issue) | ✅
-Create system design diagram(s) | design notation my beloved | ✅
+Create system design diagram(s) | design notations my beloved | ✅
 Figure out what tools to use | in progress | -
-Test USB speaker/audio playing | - | -
+Test USB speaker/audio playing | that was surprisingly easy | ✅
 Test USB microphone/audio capture | - | -
 Test Whisper model performance | - | -
 Test Piezo element/pressure sensing | - | -

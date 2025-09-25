@@ -1,0 +1,6 @@
+# Credentials
+static_ip.txt
+
+# Workplace Elements
+ppvenv/
+__pycache__/
