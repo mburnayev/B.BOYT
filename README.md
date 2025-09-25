@@ -25,7 +25,7 @@ Here is an abstracted visualization of the project that the above text describes
 - TBD
 
 ## Note(s)
-TBD
+<img width="400" height="600" alt="homer-hanma" src="https://github.com/user-attachments/assets/a87a8d43-aedb-42b7-bd3e-fc1fc899250f" />
 
 ## Project Timeline and Obstacles Breakdown
 Task | Notes | Resolved?
