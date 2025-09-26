@@ -19,10 +19,10 @@ Here is an abstracted visualization of the project that the above text describes
 
 ## Technologies Used
 - Python
-- PyTorch
 - PyAudio
+- PyGame
+- PyTorch
 - OpenAI Whisper
-- TBD
 
 ## Note(s)
 <img width="400" height="600" alt="homer-hanma" src="https://github.com/user-attachments/assets/a87a8d43-aedb-42b7-bd3e-fc1fc899250f" />
@@ -34,8 +34,30 @@ Set up new Raspberry Pi | - | ✅
 Set up Python environment | - | ✅
 Order new RPi power supply | undervoltage still potentially an issue? at least `dmesg` indicates the voltage gets normalized (like the other one, and that one runs without issue) | ✅
 Create system design diagram(s) | design notations my beloved | ✅
-Figure out what tools to use | in progress | -
-Test USB speaker/audio playing | that was surprisingly easy | ✅
-Test USB microphone/audio capture | - | -
-Test Whisper model performance | - | -
+Test USB speaker/audio playing | - | ✅
+Test USB microphone/audio capture | - | ✅
+Figure out what tools to use | might have to go back to revisit this, but I think I have everything | ✅
+Test Whisper model performance | in progress | -
+Add operation blocking to prevent input during interpretation or output | - | -
+Add confirmation voice line | - | -
+Figure out how to continuously capture audio | - | -
 Test Piezo element/pressure sensing | - | -
+Conduct E2E testing | - | -
+Create BBOYT prototype | - | -
+Probably go back to the drawing board and make revisions | - | -
+Create BBOYT v1 | - | -
+
+
+## Documentation
+--- Microphone ---
+https://makersportal.com/blog/2018/8/23/recording-audio-on-the-raspberry-pi-with-python-and-a-usb-microphone
+
+--- Speaker ---
+https://www.pygame.org/docs/ref/mixer.html#pygame.mixer
+
+--- Whisper ---
+https://huggingface.co/openai/whisper-large-v3
+
+--- Misc ---
+https://stackoverflow.com/questions/73268630/error-could-not-build-wheels-for-pyaudio-which-is-required-to-install-pyprojec
+https://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
