@@ -6,18 +6,23 @@ Author: Misha Burnayev
 """
 
 import os
-import microphone, speaker
+import microphone, speaker, interpreter
 
 def main():
     print("--- Main active ---")
     m1 = microphone.Microphone()
-    mic_input = m1.record()
+    s1 = speaker.Speaker()
+    i1 = interpreter.Interpreter()
+
+    while(input("Enter input: ") != "q"):
+        mic_input = m1.record()
+        tokens = i1.parse_speech(mic_input)
+        print(tokens)
     
     # TODO: add speech recognition model here,
     # and control logic based on parsed speech
 
-    s1 = speaker.Speaker()
-    s1.play("mic_output.wav")
+    # s1.play("mic_output.wav")
     
     # Cleanup
     os.remove("mic_output.wav")

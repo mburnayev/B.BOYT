@@ -22,7 +22,7 @@ Here is an abstracted visualization of the project that the above text describes
 - PyAudio
 - PyGame
 - PyTorch
-- OpenAI Whisper
+- Vosk
 
 ## Note(s)
 <img width="400" height="600" alt="homer-hanma" src="https://github.com/user-attachments/assets/a87a8d43-aedb-42b7-bd3e-fc1fc899250f" />
@@ -37,7 +37,9 @@ Create system design diagram(s) | design notations my beloved | ✅
 Test USB speaker/audio playing | - | ✅
 Test USB microphone/audio capture | - | ✅
 Figure out what tools to use | might have to go back to revisit this, but I think I have everything | ✅
-Test Whisper model performance | in progress | -
+Test Whisper model performance | Wouldn't play nicely with PyGame since it wanted to hog the audio drivers, also memory footprint is huge | ❎
+Set up Vosk | in progress | -
+Test Vosk model performance | in progress | -
 Add operation blocking to prevent input during interpretation or output | - | -
 Add confirmation voice line | - | -
 Figure out how to continuously capture audio | - | -
@@ -49,15 +51,18 @@ Create BBOYT v1 | - | -
 
 
 ## Documentation
---- Microphone ---
+--- Microphone --- \
 https://makersportal.com/blog/2018/8/23/recording-audio-on-the-raspberry-pi-with-python-and-a-usb-microphone
 
---- Speaker ---
+--- Speaker --- \
 https://www.pygame.org/docs/ref/mixer.html#pygame.mixer
 
---- Whisper ---
+--- Whisper --- \
 https://huggingface.co/openai/whisper-large-v3
+https://huggingface.co/openai/whisper-small
+https://huggingface.co/learn/audio-course/en/chapter5/asr_models
 
---- Misc ---
+
+--- Misc --- \
 https://stackoverflow.com/questions/73268630/error-could-not-build-wheels-for-pyaudio-which-is-required-to-install-pyprojec
 https://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
