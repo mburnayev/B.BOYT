@@ -1,12 +1,14 @@
 """
-File for OpenAI Whisper speech parsing model
+File for Vosk speech recognition model
 
 Written for Python 3.11.2
 Author: Misha Burnayev
 """
-import os
-import wave, json
+import os, wave, json
 import vosk
+
+FPS = 44100
+CHUNK_DURATION = 0.2
 
 class Interpreter:
     
@@ -17,17 +19,18 @@ class Interpreter:
 
     def parse_speech(self, audio):
         try:
-            wf = wave.open(wav_file_path, "rb")
+            wf = wave.open(audio, "rb")
         except FileNotFoundError:
-            print(f"WAV file not found: {wav_file_path}")
+            print(f"WAV file not found: {audio}")
             return None
         
-        sample_rate = wf.getframerate()
-        rec = vosk.KaldiRecognizer(model, sample_rate)
+        rec = vosk.KaldiRecognizer(self.model, FPS)
+        chunk_frames = int(FPS * CHUNK_DURATION)
+ 
+        results = []
         
         while True:
-            # Read all frames from 5 second clip
-            data = wf.readframes(44100)
+            data = wf.readframes(chunk_frames)
             if len(data) == 0:
                 break
         
@@ -35,18 +38,16 @@ class Interpreter:
                 result = json.loads(rec.Result())
                 if result['text']:
                     results.append(result['text'])
-                    print(f"Recognized: {result['text']}")
     
         final_result = json.loads(rec.FinalResult())
         if final_result['text']:
             results.append(final_result['text'])
-            print(f"Final: {final_result['text']}")
         
         wf.close()
         return ' '.join(results)
     
     def teardown(self):
-        pass
+        self.model = None
     
     def toString(self):
         return f"Interpreter stats: TBD"

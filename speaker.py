@@ -1,12 +1,11 @@
 """
-File for speaker class: handles verbal output
+Handles verbal output by the BBOYT
 
 Written for Python 3.11.2
 Author: Misha Burnayev
 """
-
-import pygame
 import time
+import pygame
 
 class Speaker:
 
@@ -23,6 +22,7 @@ class Speaker:
         
     def teardown(self):
         self.mixer.quit()
+        self.mixer = None
 
     def toString(self):
         return f"Speaker stats: TBD"

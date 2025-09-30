@@ -4,3 +4,6 @@ static_ip.txt
 # Workplace Elements
 ppvenv/
 __pycache__/
+
+# Vosk model (large file)
+vosk-model-small-en-us-0.15.zip
