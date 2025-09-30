@@ -38,7 +38,7 @@ Test USB speaker/audio playing | - | ✅
 Test USB microphone/audio capture | - | ✅
 Figure out what tools to use | might have to go back to revisit this, but I think I have everything | ✅
 Test Whisper model performance | Wouldn't play nicely with PyGame since it wanted to hog the audio drivers, also memory footprint is huge | ❎
-Set up Vosk | in progress | -
+Set up Vosk | - | ✅
 Test Vosk model performance | in progress | -
 Add operation blocking to prevent input during interpretation or output | - | -
 Add confirmation voice line | - | -
