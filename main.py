@@ -5,6 +5,8 @@ Written for Python 3.11.2
 Author: Misha Burnayev
 """
 import os
+# Suppress PyGame version and hello messages
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 import microphone, speaker, interpreter
 
 def main():
@@ -24,7 +26,6 @@ def main():
         
         elif "boy" in tokens:
             s1.play("v4_Faith.wav")
-
 
     print("--- Cleanup ---")
     os.remove("mic_output.wav")

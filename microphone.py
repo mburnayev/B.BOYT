@@ -44,6 +44,3 @@ class Microphone:
     def teardown(self):
         self.p.terminate()
         self.p = None
-
-    def toString(self):
-        return f"Microphone stats: TBD"

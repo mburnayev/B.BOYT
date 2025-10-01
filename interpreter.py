@@ -36,18 +36,15 @@ class Interpreter:
         
             if rec.AcceptWaveform(data):
                 result = json.loads(rec.Result())
-                if result['text']:
-                    results.append(result['text'])
+                if result["text"]:
+                    results.append(result["text"])
     
         final_result = json.loads(rec.FinalResult())
-        if final_result['text']:
-            results.append(final_result['text'])
+        if final_result["text"]:
+            results.append(final_result["text"])
         
         wf.close()
-        return ' '.join(results)
+        return " ".join(results)
     
     def teardown(self):
         self.model = None
-    
-    def toString(self):
-        return f"Interpreter stats: TBD"

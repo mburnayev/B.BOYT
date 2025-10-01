@@ -23,6 +23,3 @@ class Speaker:
     def teardown(self):
         self.mixer.quit()
         self.mixer = None
-
-    def toString(self):
-        return f"Speaker stats: TBD"

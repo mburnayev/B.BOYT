@@ -36,10 +36,11 @@ Order new RPi power supply | undervoltage still potentially an issue? at least `
 Create system design diagram(s) | design notations my beloved | ✅
 Test USB speaker/audio playing | - | ✅
 Test USB microphone/audio capture | - | ✅
-Figure out what tools to use | might have to go back to revisit this, but I think I have everything | ✅
-Test Whisper model performance | Wouldn't play nicely with PyGame since it wanted to hog the audio drivers, also memory footprint is huge | ❎
+Figure out what tools to use | might have to go back to revisit this (# of revisits: 2), but I think I have everything | ✅
+Test Whisper model performance | wouldn't play nicely with PyGame since it wanted to hog the audio drivers, also memory footprint is huge | ❎
 Set up Vosk | - | ✅
-Test Vosk model performance | in progress | -
+Test Vosk model performance | success? vosk-model-en-us-0.22-lgraph was too memory intensive, but vosk-model-small-en-us-0.15 did the job  | ✅
+Reclaim RAM for stronger model usage | I think I can pull this off by:<br> 1: not sshing using the souped up vscode connection (eats up ~60% of available RAM)<br> 2: allocating some swap memory to RAM since most of the time it isn't being used | -
 Add operation blocking to prevent input during interpretation or output | - | -
 Add confirmation voice line | - | -
 Figure out how to continuously capture audio | - | -
@@ -48,6 +49,7 @@ Conduct E2E testing | - | -
 Create BBOYT prototype | - | -
 Probably go back to the drawing board and make revisions | - | -
 Create BBOYT v1 | - | -
+Create BBOYT v2 | - | -
 
 
 ## Documentation
