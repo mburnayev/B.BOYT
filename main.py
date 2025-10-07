@@ -15,17 +15,40 @@ def main():
     s1 = speaker.Speaker()
     vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
     i1 = interpreter.Interpreter(vosk_path)
+    confirm_mode = False
 
     while(1):
+        print("--- Recording audio ---")
         m1.record()
         tokens = i1.parse_speech("mic_output.wav")
         print(f"Interpreted speech: {tokens}")
         
-        if "quit" in tokens:
-            break
-        
-        elif "boy" in tokens:
+        if "boy" in tokens:
+            confirm_mode = True
             s1.play("v4_Faith.wav")
+            continue
+
+        if confirm_mode == True:
+            if "beer" in tokens:
+                confirm_mode = False
+                print("beer mode")
+                # TODO add GPIO output to send activation signal to motor
+                # Sleep for the amount of time necessary to dispense beverage
+                # time.sleep(10)
+
+            elif "monkey" in tokens:
+                print("monkey mode")
+                confirm_mode = False
+                pass
+                # TODO play "brass monkey" by the Beastie Boys, maybe not the whole thing though
+
+            elif "music" in tokens:
+                confirm_mode = False
+                pass
+                # TODO play 
+            
+        elif "quit" in tokens and confirm_mode == False:
+            break
 
     print("--- Cleanup ---")
     os.remove("mic_output.wav")
