@@ -1,3 +1,3 @@
-torch
+vosk
 pygame
 pyaudio

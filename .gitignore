@@ -7,3 +7,4 @@ __pycache__/
 
 # Vosk model (large file)
 vosk-model-small-en-us-0.15.zip
+vosk-model-en-us-0.22-lgraph.zip
