@@ -4,7 +4,7 @@ File for Vosk speech recognition model
 Written for Python 3.11.2
 Author: Misha Burnayev
 """
-import os, wave, json
+import wave, json
 import vosk
 
 FPS = 44100

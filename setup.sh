@@ -17,10 +17,9 @@ if [ $1 = "help" ]
         echo "Input details:"
         echo "- help: outputs this menu again"
         echo "- all: sequentially executes all 3 stages listed below"
-        echo "- <stage number>: executes just 1 of the 3 following stages:"
+        echo "- <stage number>: executes just 1 of the 2 following stages:"
         echo "  - 1: Setup Raspberry Pi"
-        echo "  - 2: Setup Download and Install Python 3.9.2"
-        echo "  - 3: Setup Python Virtual Environment"
+        echo "  - 2: Setup Python Virtual Environment"
         echo "----- setup.sh Help -----"
         exit
 fi
@@ -47,12 +46,23 @@ if [ $1 -eq 1 ] || [ $1 = "all" ]
 
         cat /etc/dhcpcd.conf
         echo "---------- Done setting up static IP ----------"
+
+        # disable and remove CUPS since it's useless
+        sudo systemctl stop cups-browsed
+        sudo systemctl disable cups-browsed
+        sudo apt purge cups-browsed
+        sudo systemctl stop cups
+        sudo systemctl disable cups
+        sudo apt purge cups
+
+        sudo apt autoremove
+
         echo "---------- Stage 1 Setup Complete ----------"
 fi
 
-if [ $1 -eq 3 ] || [ $1 = "all" ]
+if [ $1 -eq 2 ] || [ $1 = "all" ]
     then
-        echo "---------- Executing stage 3 ----------"
+        echo "---------- Executing stage 2 ----------"
         echo "---------- Setting up Python Virtual Environment... ----------"
         cd /home/pi/Downloads/B.BOYT
         python -m venv ppvenv
@@ -60,7 +70,8 @@ if [ $1 -eq 3 ] || [ $1 = "all" ]
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         echo "---------- Finished setting up Python Virtual Environment ----------"
-        echo "---------- Stage 3 Setup Complete ----------"
+        echo "---------- Stage 2 Setup Complete ----------"
 fi
 
+echo "Note: to free up extra memory, use raspi-config to set manually check option to boot to command line instead of desktop"
 # script can then be run using `python3 main.py`
