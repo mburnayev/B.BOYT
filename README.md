@@ -42,7 +42,7 @@ Set up Vosk | - | ✅
 Test Vosk model performance | success? vosk-model-en-us-0.22-lgraph was too memory intensive, but vosk-model-small-en-us-0.15 did the job  | ✅
 Add confirmation voice line | - | ✅
 Reclaim RAM for stronger model usage | <li> no more sshing via souped up vscode connection <li> tweaked raspi-config to boot to cmdline instead of desktop <li> removed unnecessary utilities (CUPS) <br> Learned how RAM and swap memory work, discovered other issues in this process | 🆗
-Get new microSD card | ONN betrayed me... sold me a 32GB card with 0.5GB storage on it... | -
+Get new microSD card | ONN betrayed me... sold me a 32GB card with 0.5GB storage on it... | ✅
 Add operation blocking to prevent input during interpretation or output | in progress | -
 Test GPIO output | - | -
 Retest vosk speech recognition model | - | -
@@ -71,4 +71,5 @@ https://huggingface.co/learn/audio-course/en/chapter5/asr_models
 
 --- Misc --- \
 https://stackoverflow.com/questions/73268630/error-could-not-build-wheels-for-pyaudio-which-is-required-to-install-pyprojec
-https://stackoverflow.com/questions/8110310/simple-way-to-query-connected-usb-devices-info-in-python
+https://stackoverflow.com/questions/51464455/how-to-disable-welcome-message-when-importing-pygame
+

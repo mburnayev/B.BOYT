@@ -39,15 +39,13 @@ def main():
             elif "monkey" in tokens:
                 print("monkey mode")
                 confirm_mode = False
-                pass
                 # TODO play "brass monkey" by the Beastie Boys, maybe not the whole thing though
 
             elif "music" in tokens:
                 confirm_mode = False
-                pass
                 # TODO play 
             
-        elif "quit" in tokens and confirm_mode == False:
+        elif "quit" in tokens:
             break
 
     print("--- Cleanup ---")
