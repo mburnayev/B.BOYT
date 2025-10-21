@@ -27,12 +27,12 @@ fi
 if [ $1 -eq 1 ] || [ $1 = "all" ]
     then
         echo "---------- Executing stage 1 ----------"
-        echo "---------- Running apt-get update... ----------"
+        echo "---------- Running apt update and necessary library installs ----------"
         sudo apt-get update
+	sudo apt-get install libportaudio2 portaudio19-dev python3-dev
         echo "---------- apt-get update done ----------"
 
         echo "---------- Setting up static IP... ----------"
-        sudo apt-get install vim -y
         iface=`ip r | awk '{print $3}' | sed -n 2p`
         router_IP=`ip r | awk '{print $3}' | sed -n 1p`
         DNS_IP=`grep "nameserver" /etc/resolv.conf | awk '{print $2}'`
@@ -50,11 +50,12 @@ if [ $1 -eq 1 ] || [ $1 = "all" ]
         # disable and remove CUPS since it's useless
         sudo systemctl stop cups-browsed
         sudo systemctl disable cups-browsed
-        sudo apt purge cups-browsed
+        sudo apt purge cups-browsed -y
         sudo systemctl stop cups
         sudo systemctl disable cups
-        sudo apt purge cups
+        sudo apt purge cups -y
 
+	echo "---------- Autoremoving miscellaneous libraries ----------"
         sudo apt autoremove
 
         echo "---------- Stage 1 Setup Complete ----------"
