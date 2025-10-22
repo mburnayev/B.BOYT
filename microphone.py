@@ -32,14 +32,7 @@ class Microphone:
         stream.stop_stream()
         stream.close()
         
-        # Slower, but simpler and more compatible method of
-        # manipulating audio data for the Vosk model
-        wf = wave.open("mic_output.wav", "wb")
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(self.p.get_sample_size(FORMAT))
-        wf.setframerate(FPS)
-        wf.writeframes(b''.join(frames))
-        wf.close()
+        return b"".join(frames)
     
     def teardown(self):
         self.p.terminate()

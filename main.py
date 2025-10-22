@@ -25,8 +25,8 @@ def main():
     while(1):
         try:
             print("--- Recording audio ---")
-            mic.record()
-            tokens = intp.parse_speech("mic_output.wav").lower()
+            audio_data = mic.record()
+            tokens = intp.parse_speech(audio_data).lower()
             print(f"Interpreted speech: {tokens}")
                         
             if "boy" in tokens:
@@ -48,6 +48,7 @@ def main():
                     # TODO play "brass monkey" by the Beastie Boys, maybe not the whole thing though
 
                 elif "music" in tokens:
+                    print("music mode")
                     confirm_mode = False
                     # TODO play 
                 
@@ -57,7 +58,6 @@ def main():
             break
 
     print("--- Cleanup ---")
-    os.remove("mic_output.wav")
     mic.teardown()
     spkr.teardown()
     intp.teardown()
