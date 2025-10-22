@@ -4,12 +4,11 @@ Handles collection and storage of input
 Written for Python 3.11.2
 Author: Misha Burnayev
 """
-import wave
 import pyaudio
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-FPS = 44100
+FPS = 16000
 
 class Microphone:
 
@@ -24,8 +23,8 @@ class Microphone:
                     frames_per_buffer = 1024)
         
         frames = []
-        # Read 2 seconds of input at a time
-        for i in range(0, int(FPS / 1024 * 2)):
+        # take input for 1.5 seconds
+        for i in range(0, int(FPS / 1024 * 1.5)):
             data = stream.read(1024)
             frames.append(data)
         

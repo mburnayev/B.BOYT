@@ -4,8 +4,7 @@ Handles verbal output by the BBOYT
 Written for Python 3.11.2
 Author: Misha Burnayev
 """
-import time
-import pygame
+import time, pygame
 
 class Speaker:
 

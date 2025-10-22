@@ -6,7 +6,7 @@ Author: Misha Burnayev
 """
 import vosk, json
 
-FPS = 44100
+FPS = 16000
 CHUNK_DURATION = 0.2
 
 class Interpreter:
