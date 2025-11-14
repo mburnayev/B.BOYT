@@ -1,42 +1,33 @@
 """
-File for Vosk speech recognition model
+Vosk speech recognition model for interpreting audio data
 
-Written for Python 3.11.2
+Written for Python 3.13.5
 Author: Misha Burnayev
 """
 import vosk, json
 
 FPS = 16000
-CHUNK_DURATION = 0.2
 
 class Interpreter:
     
     def __init__(self, model_path):
-        # Suppress verbose output
-        vosk.SetLogLevel(-1)
-        self.model = vosk.Model(model_path)
+       # Suppress verbose output
+       vosk.SetLogLevel(-1)
+       self.model = vosk.Model(model_path)
+       self.grammar = '["boy", "beer", "monkey", "music", "[unk]"]'
 
     def parse_speech(self, audio_bytes):        
-        rec = vosk.KaldiRecognizer(self.model, FPS)
-        chunk_size = int(FPS * CHUNK_DURATION * 2)
- 
-        results = []
-        offset = 0
+        rec = vosk.KaldiRecognizer(self.model, FPS, self.grammar)
+        rec.AcceptWaveform(audio_bytes)
+        result = json.loads(rec.FinalResult())
         
-        while offset < len(audio_bytes):
-            chunk = audio_bytes[offset:offset + chunk_size]
-            offset += chunk_size
+        detected = result.get("text", "").strip().lower()
         
-            if rec.AcceptWaveform(chunk):
-                result = json.loads(rec.Result())
-                if result["text"]:
-                    results.append(result["text"])
-    
-        final_result = json.loads(rec.FinalResult())
-        if final_result["text"]:
-            results.append(final_result["text"])
+        keywords = ["boy", "beer", "monkey", "music"]
+        if detected in keywords:
+            return detected
         
-        return " ".join(results)
-    
+        return None
+
     def teardown(self):
         self.model = None

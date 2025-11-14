@@ -1,7 +1,7 @@
 """
-Handles collection and storage of input
+Creates microphone stream to capture audio, returns bytearray of audio data
 
-Written for Python 3.11.2
+Written for Python 3.13.5
 Author: Misha Burnayev
 """
 import pyaudio
@@ -23,8 +23,8 @@ class Microphone:
                     frames_per_buffer = 1024)
         
         frames = []
-        # take input for 1.5 seconds
-        for i in range(0, int(FPS / 1024 * 1.5)):
+        # take input for 2 seconds
+        for i in range(0, int(FPS / 1024 * 2)):
             data = stream.read(1024)
             frames.append(data)
         

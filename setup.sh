@@ -29,7 +29,7 @@ if [ $1 -eq 1 ] || [ $1 = "all" ]
         echo "---------- Executing stage 1 ----------"
         echo "---------- Running apt update and necessary library installs ----------"
         sudo apt-get update
-	sudo apt-get install libportaudio2 portaudio19-dev python3-dev
+	sudo apt-get install libportaudio2 portaudio19-dev python3-dev vim -y
         echo "---------- apt-get update done ----------"
 
         echo "---------- Setting up static IP... ----------"
@@ -56,7 +56,7 @@ if [ $1 -eq 1 ] || [ $1 = "all" ]
         sudo apt purge cups -y
 
 	echo "---------- Autoremoving miscellaneous libraries ----------"
-        sudo apt autoremove
+        sudo apt autoremove -y
 
         echo "---------- Stage 1 Setup Complete ----------"
 fi

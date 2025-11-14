@@ -1,14 +1,12 @@
 """
-BBOYT core script, handles microphone, speaker, and model interactions, and handles control flow between the aformentioned modules
+BBOYT control flow core, handles interactions between peripherals and interpreter
 
-Written for Python 3.11.2
+Written for Python 3.13.5
 Author: Misha Burnayev
 """
 import os
 # Suppress PyGame version and hello messages
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
-# Use all available cores
-os.environ["OMP_NUM_THREADS"] = "4"
 
 import microphone, speaker, interpreter
 
@@ -16,8 +14,7 @@ def main():
     print("--- Main active ---")
     mic = microphone.Microphone()
     spkr = speaker.Speaker()
-    # vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
-    vosk_path = os.path.expanduser("~/Documents/BBOYT/B.BOYT/vosk-model-small-en-us-0.15")
+    vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
 
     intp = interpreter.Interpreter(vosk_path)
     confirm_mode = False
@@ -26,7 +23,9 @@ def main():
         try:
             print("--- Recording audio ---")
             audio_data = mic.record()
-            tokens = intp.parse_speech(audio_data).lower()
+            tokens = intp.parse_speech(audio_data)
+            if tokens == None:
+                continue
             print(f"Interpreted speech: {tokens}")
                         
             if "boy" in tokens:
@@ -41,16 +40,21 @@ def main():
                     # TODO add GPIO output to send activation signal to motor
                     # Sleep for the amount of time necessary to dispense beverage
                     # time.sleep(10)
+                    continue
 
                 elif "monkey" in tokens:
                     print("monkey mode")
                     confirm_mode = False
-                    # TODO play "brass monkey" by the Beastie Boys, maybe not the whole thing though
+                    # TODO make speaker playing multithreaded
+                    # spkr.play("monkey.mp3")
+                    continue
 
                 elif "music" in tokens:
                     print("music mode")
                     confirm_mode = False
-                    # TODO play 
+                    # TODO make speaker playing multithreaded
+                    # spkr.play("radio.mp3")
+                    continue
                 
             elif "quit" in tokens:
                 break

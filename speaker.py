@@ -1,7 +1,7 @@
 """
-Handles verbal output by the BBOYT
+Handles BBOYT audio output
 
-Written for Python 3.11.2
+Written for Python 3.13.5
 Author: Misha Burnayev
 """
 import time, pygame
