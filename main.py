@@ -27,7 +27,7 @@ def main():
             if tokens == None:
                 continue
             print(f"Interpreted speech: {tokens}")
-                        
+            
             if "boy" in tokens:
                 confirm_mode = True
                 spkr.play("v4_Faith.wav")
