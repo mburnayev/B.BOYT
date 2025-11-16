@@ -1,7 +1,7 @@
 # B.BOYT
 [Beer/Beverage Boy/Bot]
 Imagine a boy... or even better, a bot... that serves you beer... or even better, a beverage... \
-We bring you a state-of-the-art, portable beverage dispensing robot somewhat shaped like a monolith that comes with an interactive ashtray, perfect for a shady picnic or while lounging around on a relaxing beachfront — the applications are endless.
+We bring you a state-of-the-art, portable beverage dispensing robot that comes with an interactive ashtray, perfect for a shady picnic or while lounging around on a relaxing beachfront — the applications are endless.
 
 ## Project Overview
 This portion of the system is comprised of the following components:
@@ -22,7 +22,6 @@ Here is an abstracted visualization of the project that the above text describes
 - PyAudio
 - PyGame
 - Vosk
-- Cron
 
 ## Note(s)
 <img width="400" height="600" alt="homer-hanma" src="https://github.com/user-attachments/assets/a87a8d43-aedb-42b7-bd3e-fc1fc899250f" />
@@ -67,10 +66,10 @@ Get new microSD card | ONN betrayed me... sold me a 32GB card with 0.5GB storage
 Install and test faster-whisper model | still slower (more computationally expensive) than the smallest Vosk model | 🆗
 Figure out how to [seemingly] continuously capture audio | ~~Might be able to get around this with a faster model~~ nope! just needed to add a grammar | ✅
 Retest vosk speech recognition model | - | ✅
-Add cron job to automatically start BBOYT core script | - | ✅
+Add rc.local job to automatically start BBOYT core script | - | ✅
 Multithread program to allow users to interrupt non-dispensing operations | in progress | -
+Acquire FSR element and test pressure sensing | - | -
 Acquire motor and test GPIO functionality | - | -
-Acquire Piezo element and test pressure sensing | - | -
 Conduct E2E testing | - | -
 Create BBOYT prototype | - | -
 Finish BBOYT v1 | - | -
