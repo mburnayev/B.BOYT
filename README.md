@@ -22,6 +22,7 @@ Here is an abstracted visualization of the project that the above text describes
 - PyAudio
 - PyGame
 - Vosk
+- Cron
 
 ## Note(s)
 <img width="400" height="600" alt="homer-hanma" src="https://github.com/user-attachments/assets/a87a8d43-aedb-42b7-bd3e-fc1fc899250f" />
@@ -63,9 +64,10 @@ Add confirmation voice line | - | ✅
 Reclaim RAM for stronger model usage | <li> no more sshing via souped up vscode connection <li> tweaked raspi-config to boot to cmdline instead of desktop <li> removed unnecessary utilities (CUPS) <br> Learned how RAM and swap memory work, discovered other issues in this process | 🆗
 Get new microSD card | ONN betrayed me... sold me a 32GB card with 0.5GB storage on it... | ✅
 ---------- | **Hiatus** | ----------
-Install and test faster-whisper model | still slower (more computationally expensive) than the smallest Vosk model | ✅
+Install and test faster-whisper model | still slower (more computationally expensive) than the smallest Vosk model | 🆗
 Figure out how to [seemingly] continuously capture audio | ~~Might be able to get around this with a faster model~~ nope! just needed to add a grammar | ✅
 Retest vosk speech recognition model | - | ✅
+Add cron job to automatically start BBOYT core script | - | ✅
 Multithread program to allow users to interrupt non-dispensing operations | in progress | -
 Acquire motor and test GPIO functionality | - | -
 Acquire Piezo element and test pressure sensing | - | -
@@ -94,4 +96,5 @@ https://stackoverflow.com/questions/73268630/error-could-not-build-wheels-for-py
 https://stackoverflow.com/questions/51464455/how-to-disable-welcome-message-when-importing-pygame <br>
 https://forums.raspberrypi.com/viewtopic.php?t=208626 <br>
 https://docs.kernel.org/admin-guide/pm/cpufreq.html <br>
+https://www.youtube.com/watch?v=Gl9HS7-H0mI <br>
 

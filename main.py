@@ -19,6 +19,7 @@ def main():
     intp = interpreter.Interpreter(vosk_path)
     confirm_mode = False
 
+    spkr.play("start.mp3")
     while(1):
         try:
             print("--- Recording audio ---")
