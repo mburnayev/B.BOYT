@@ -4,7 +4,7 @@ BBOYT control flow core, handles interactions between peripherals and interprete
 Written for Python 3.13.5
 Author: Misha Burnayev
 """
-import os
+import os, threading
 # Suppress PyGame version and hello messages
 os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
@@ -18,20 +18,22 @@ def main():
 
     intp = interpreter.Interpreter(vosk_path)
     confirm_mode = False
+    music_thread = None
 
-    spkr.play("start.mp3")
-    while(1):
+    spkr.play("start.mp3", False)
+    while True:
         try:
             print("--- Recording audio ---")
             audio_data = mic.record()
             tokens = intp.parse_speech(audio_data)
             if tokens == None:
                 continue
-            print(f"Interpreted speech: {tokens}")
             
             if "boy" in tokens:
+                if music_thread and music_thread.is_alive():
+                    spkr.stop_all()
                 confirm_mode = True
-                spkr.play("v4_Faith.wav")
+                spkr.play("v4_Faith.wav", False)
                 continue
 
             if confirm_mode == True:
@@ -46,15 +48,15 @@ def main():
                 elif "monkey" in tokens:
                     print("monkey mode")
                     confirm_mode = False
-                    # TODO make speaker playing multithreaded
-                    # spkr.play("monkey.mp3")
+                    music_thread = threading.Thread(target = spkr.play, args = ("monkey.mp3", False), daemon = True)
+                    music_thread.start()
                     continue
 
                 elif "music" in tokens:
                     print("music mode")
                     confirm_mode = False
-                    # TODO make speaker playing multithreaded
-                    # spkr.play("radio.mp3")
+                    music_thread = threading.Thread(target = spkr.play, args = ("radio.mp3", True), daemon = True)
+                    music_thread.start()
                     continue
                 
             elif "quit" in tokens:
