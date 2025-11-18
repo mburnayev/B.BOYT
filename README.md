@@ -66,12 +66,12 @@ Get new microSD card | ONN betrayed me... sold me a 32GB card with 0.5GB storage
 Install and test faster-whisper model | still slower (more computationally expensive) than the smallest Vosk model | 🆗
 Figure out how to [seemingly] continuously capture audio | ~~Might be able to get around this with a faster model~~ nope! just needed to add a grammar | ✅
 Retest vosk speech recognition model | - | ✅
-Add rc.local job to automatically start BBOYT core script | - | ✅
-Multithread program to allow users to interrupt non-dispensing operations | in progress | -
-Acquire FSR element and test pressure sensing | - | -
+Add rc.local job to automatically start BBOYT core script on boot | - | ✅
+Multithread program to allow users to interrupt non-dispensing operations | - | ✅
+Acquire FSR element, set up breadboard, and test pressure sensing | in progress | -
 Acquire motor and test GPIO functionality | - | -
-Conduct E2E testing | - | -
 Create BBOYT prototype | - | -
+Conduct E2E testing | - | -
 Finish BBOYT v1 | - | -
 Finish BBOYT v2 | - | -
 
@@ -96,4 +96,5 @@ https://stackoverflow.com/questions/51464455/how-to-disable-welcome-message-when
 https://forums.raspberrypi.com/viewtopic.php?t=208626 <br>
 https://docs.kernel.org/admin-guide/pm/cpufreq.html <br>
 https://www.youtube.com/watch?v=Gl9HS7-H0mI <br>
+https://docs.python.org/3/library/threading.html <br>
 

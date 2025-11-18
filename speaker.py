@@ -13,19 +13,18 @@ class Speaker:
         self.mixer.init()
         self.stop_flag = threading.Event()
         self.sound_cache = {}
+    
+    def preload(self, sfxs):
+        print("--- Preloading audio tracks ---")
+        for sfx in sfxs:
+            self.sound_cache[sfx] = self.mixer.Sound(sfx)
 
     def play(self, sfx, loop):
-        print("sfx playing...")
         self.stop_flag.clear()
-        
-        if sfx not in self.sound_cache:
-            self.sound_cache[sfx] = self.mixer.Sound(sfx)
         
         sound = self.sound_cache[sfx]
     
         while True:
-            print("in sfx inner loop")
-
             if self.stop_flag.is_set():
                 sound.stop()
                 break
@@ -36,9 +35,9 @@ class Speaker:
                 if self.stop_flag.is_set():
                     sound.stop()
                     break
-                time.sleep(0.1)
+                time.sleep(0.05)
             
-            if loop == False:
+            if not loop:
                 break
     
     def stop_all(self):
@@ -46,5 +45,7 @@ class Speaker:
         self.mixer.stop()
         
     def teardown(self):
+        self.stop_all()
+        self.sound_cache.clear()
         self.mixer.quit()
         self.mixer = None
