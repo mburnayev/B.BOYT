@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wait for USD + audio drivers to initialize
+# wait for USB + audio drivers to initialize
 sleep 15
 
 tmux kill-session -t bboyt 2>/dev/null

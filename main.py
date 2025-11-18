@@ -15,19 +15,15 @@ def main():
     mic = microphone.Microphone()
     spkr = speaker.Speaker()
     # cache audio for reduced overhead when called later
-    spkr.preload([
-        "start.mp3",
-        "v4_Faith.wav",
-        "monkey.mp3",
-        "radio.mp3"
-    ])
+    sfx_list = ["./sfx/start.mp3", "./sfx/v4_Faith.wav", "./sfx/monkey.mp3", "./sfx/radio.mp3"]
+    spkr.preload(sfx_list)
     
     vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
     intp = interpreter.Interpreter(vosk_path)
     confirm_mode = False
     music_thread = None
 
-    spkr.play("start.mp3", False)
+    spkr.play(sfx_list[0], False)
     while True:
         try:
             print("--- Recording audio ---")
@@ -42,7 +38,7 @@ def main():
                     music_thread.join(timeout = 1.0)
                     music_thread = None
                 confirm_mode = True
-                spkr.play("v4_Faith.wav", False)
+                spkr.play(sfx_list[1], False)
                 continue
 
             if confirm_mode:
@@ -56,13 +52,13 @@ def main():
 
                 elif "monkey" in tokens:
                     confirm_mode = False
-                    music_thread = threading.Thread(target = spkr.play, args = ("monkey.mp3", False), daemon = True)
+                    music_thread = threading.Thread(target = spkr.play, args = (sfx_list[2], False), daemon = True)
                     music_thread.start()
                     continue
 
                 elif "music" in tokens:
                     confirm_mode = False
-                    music_thread = threading.Thread(target = spkr.play, args = ("radio.mp3", True), daemon = True)
+                    music_thread = threading.Thread(target = spkr.play, args = (sfx_list[3], True), daemon = True)
                     music_thread.start()
                     continue
                 
