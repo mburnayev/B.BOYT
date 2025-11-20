@@ -14,7 +14,7 @@ class Interpreter:
        # Suppress verbose output
        vosk.SetLogLevel(-1)
        self.model = vosk.Model(model_path)
-       self.grammar = '["boy", "beer", "monkey", "music", "[unk]"]'
+       self.grammar = '["boy", "beer", "monkey", "music", "banana", "[unk]"]'
 
     def parse_speech(self, audio_bytes):        
         rec = vosk.KaldiRecognizer(self.model, FPS, self.grammar)
@@ -23,7 +23,7 @@ class Interpreter:
         
         detected = result.get("text", "").strip().lower()
         
-        keywords = ["boy", "beer", "monkey", "music"]
+        keywords = ["boy", "beer", "monkey", "music", "banana"]
         if detected in keywords:
             return detected
         

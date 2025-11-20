@@ -62,7 +62,7 @@ def main():
                     music_thread.start()
                     continue
                 
-            elif "quit" in tokens:
+            elif "banana" in tokens:
                 break
         except KeyboardInterrupt:
             break
