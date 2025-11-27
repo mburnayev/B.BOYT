@@ -68,13 +68,15 @@ Figure out how to [seemingly] continuously capture audio | ~~Might be able to ge
 Retest vosk speech recognition model | - | ✅
 Add rc.local job to automatically start BBOYT core script on boot | - | ✅
 Multithread program to allow users to interrupt non-dispensing operations | - | ✅
-Acquire FSR element, set up breadboard, and test pressure sensing | in progress | -
-Acquire motor and test GPIO functionality | - | -
+~~Acquire FSR element, set up breadboard, and test pressure sensing~~ | ~~in progress~~ | ❎
+Acquire temperature sensing element, set up breadboard, test heat detection | in progress | -
+Acquire motor | - | ✅
+Solder motor connections | in progress | -
+Test motor GPIO functionality | - | -
 Create BBOYT prototype | - | -
 Conduct E2E testing | - | -
 Finish BBOYT v1 | - | -
 Finish BBOYT v2 | - | -
-
 
 ## Documentation
 --- Microphone --- \
