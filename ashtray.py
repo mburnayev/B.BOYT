@@ -9,7 +9,7 @@ class Ashtray:
     def __init__(self, pin):
         self.sensor = dht11.DHT11(pin)
         self.stop_flag = threading.Event()
-        self.temp_thresh = 25
+        self.temp_thresh = 27 # TODO: take inital temp reading so boy isn't always screaming on a hot summer day
     
     def detect_temp_change(self, queue):
         self.stop_flag.clear()
@@ -18,15 +18,13 @@ class Ashtray:
             if self.stop_flag.is_set():
                 break
             
-            r = self.sensor.read()
+            result = self.sensor.read()
 
-            if r.is_valid():
-                print(f"Temperature: {r.temperature} C")
-                if r.temperature > self.temp_thresh:
-                    print("temp input detected!")
+            if result.is_valid():
+                if result.temperature > self.temp_thresh:
                     queue.put(True)
-                    time.sleep(5)
-            time.sleep(2)
+                    time.sleep(10)
+            time.sleep(1)
     
     def stop_all(self):
         self.stop_flag.set()

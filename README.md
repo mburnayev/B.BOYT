@@ -6,10 +6,10 @@ We bring you a state-of-the-art, portable beverage dispensing robot that comes w
 ## Project Overview
 This portion of the system is comprised of the following components:
 - Raspberry Pi 3B
-- USB Microphone
-- USB Speaker
-- FSR element
-- Motor
+- USB microphone
+- USB speaker
+- DHT11 temperature sensor
+- TT motor
 
 The B.BOYT system starts off by passively listening to its environment, awaiting a user to address it. If the B.BOYT microphone captures audio that sounds like "boy", it will confirm that someone was addressing it by replying "yes father?" Should someone confirm their interaction with the B.BOYT by replying "beer," it will send a signal to actuate a motor inside of itself to rotate a step conveyor and dispense a drink to the user. 
 
@@ -69,7 +69,7 @@ Retest vosk speech recognition model | - | ✅
 Add rc.local job to automatically start BBOYT core script on boot | - | ✅
 Multithread program to allow users to interrupt non-dispensing operations | - | ✅
 ~~Acquire FSR element, set up breadboard, and test pressure sensing~~ | ~~in progress~~ | ❎
-Acquire temperature sensing element, set up breadboard, test heat detection | in progress | -
+Acquire temperature sensing element, set up breadboard, test heat detection | already had the dht11 on hand | ✅
 Acquire motor | - | ✅
 Solder motor connections | in progress | -
 Test motor GPIO functionality | - | -

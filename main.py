@@ -33,7 +33,7 @@ def main():
     tray = ashtray.Ashtray(dht11_pin)
     
     # cache audio for reduced overhead when called later
-    sfx_list = ["./sfx/start.mp3", "./sfx/v4_Faith.wav", "./sfx/monkey.mp3", "./sfx/radio.mp3", "./sfx/pain.mp3"]
+    sfx_list = ["./sfx/start.mp3", "./sfx/v4_Faith.wav", "./sfx/monkey.mp3", "./sfx/radio.mp3", "./sfx/pain.mp3", "./sfx/stop.mp3"]
     spkr.preload(sfx_list)
     
     vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
@@ -48,11 +48,12 @@ def main():
     spkr.play(sfx_list[0], False)
     
     # spawn separate thread for ashtray temperature sensing
-    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue,), daemon = False)
+    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue,), daemon = True)
     ashtray_thread.start()
     
     while True:
         try:
+            # check if temperature sensor got any notable readings
             ashtray_triggered = False
             if not sensing_queue.empty():
                 sensing_queue.get()
@@ -64,7 +65,7 @@ def main():
                 spkr.play(sfx_list[4], False)
                 continue
 
-            print("--- Recording audio ---")
+            # capture verbal user input
             audio_data = mic.record()
             tokens = intp.parse_speech(audio_data)
             
@@ -82,7 +83,7 @@ def main():
                     confirm_mode = False
                     print("beer mode")
                     GPIO.output(motor_pin, GPIO.HIGH)
-                    # sleep for the amount of time necessary to dispense beverage
+                    # TODO: sleep for the amount of time necessary to dispense beverage
                     time.sleep(1)
                     GPIO.output(motor_pin, GPIO.LOW)
                     continue
@@ -105,6 +106,7 @@ def main():
             break
 
     print("--- Cleanup ---")
+    spkr.play(sfx_list[5], False)
     tray.teardown()
     mic.teardown()
     spkr.teardown()
