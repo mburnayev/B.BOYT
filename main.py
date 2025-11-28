@@ -4,7 +4,7 @@ BBOYT control flow core, handles interactions between peripherals and interprete
 Written for Python 3.13.5
 Author: Misha Burnayev
 """
-import os, threading
+import os, threading, time
 from queue import Queue
 import RPi.GPIO as GPIO
 # suppress PyGame version and hello messages
@@ -48,7 +48,7 @@ def main():
     spkr.play(sfx_list[0], False)
     
     # spawn separate thread for ashtray temperature sensing
-    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue,), daemon = True)
+    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue,), daemon = False)
     ashtray_thread.start()
     
     while True:
