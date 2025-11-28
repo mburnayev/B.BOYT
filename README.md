@@ -15,7 +15,7 @@ The B.BOYT system starts off by passively listening to its environment, awaiting
 
 Here is an abstracted visualization of the project that the above text describes:\
 <img width="567" height="484" alt="Screenshot 2025-09-23 at 2 01 01 AM" src="https://github.com/user-attachments/assets/81191607-cc8a-4021-9bc4-1c147490db6b" />
-<img width="1100" height="636" alt="Screenshot 2025-09-23 at 2 01 13 AM" src="https://github.com/user-attachments/assets/245168dd-d840-4332-957c-68a0933571a0" />
+<img width="1100" height="636" alt="Screenshot 2025-11-28 at 2 27 10 PM" src="https://github.com/user-attachments/assets/5b21ca46-9490-453b-91f6-592f13145408" />
 
 ## Technologies Used
 - Python
