@@ -12,13 +12,21 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
 
 import microphone, speaker, interpreter, ashtray
 
+def kill_sfx(thread, speaker):
+    if thread and thread.is_alive():
+        speaker.stop_all()
+        thread.join(timeout = 1.0)
+    return None
+
 def main():
-    print("--- Setup ---")
+    print("--- Configuration ---")
+    # pin and digital I/O setup
     GPIO.setmode(GPIO.BCM)
-    # use 7th pin (GPIO4) for digital input and 11th pin (GPIO17) for digital output
-    motor_pin = 17
+    dht11_pin = 4 # GPIO4 - pin 7
+    motor_pin = 17 # GPIO17 - pin 11
     
     GPIO.setup(motor_pin, GPIO.OUT)
+    GPIO.output(motor_pin, GPIO.LOW)
     
     mic = microphone.Microphone()
     spkr = speaker.Speaker()
@@ -30,9 +38,9 @@ def main():
     
     vosk_path = os.path.expanduser("~/Downloads/B.BOYT/vosk-model-small-en-us-0.15")
     intp = interpreter.Interpreter(vosk_path)
+    tokens = None
     confirm_mode = False
     music_thread = None
-    ashtray_thread = None
     sensing_queue = Queue()
     
     print("--- Main active ---")
@@ -40,29 +48,33 @@ def main():
     spkr.play(sfx_list[0], False)
     
     # spawn separate thread for ashtray temperature sensing
-    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue), daemon = True)
+    ashtray_thread = threading.Thread(target = tray.detect_temp_change, args = (sensing_queue,), daemon = True)
     ashtray_thread.start()
     
     while True:
         try:
+            ashtray_triggered = False
+            if not sensing_queue.empty():
+                sensing_queue.get()
+                ashtray_triggered = True
+            
+            if ashtray_triggered:
+                confirm_mode = False
+                music_thread = kill_sfx(music_thread, spkr)
+                spkr.play(sfx_list[4], False)
+                continue
+
             print("--- Recording audio ---")
             audio_data = mic.record()
             tokens = intp.parse_speech(audio_data)
+            
             if not tokens:
                 continue
             
-            if "boy" in tokens or sensing_queue.get() == True:
-                if music_thread and music_thread.is_alive():
-                    spkr.stop_all()
-                    music_thread.join(timeout = 1.0)
-                    music_thread = None
-    
-                if sensing_queue.get() is None:
-                    confirm_mode = False
-                    spkr.play(sfx_list[4], False)
-                else:
-                    confirm_mode = True
-                    spkr.play(sfx_list[1], False)
+            if "boy" in tokens:
+                confirm_mode = True
+                music_thread = kill_sfx(music_thread, spkr)                    
+                spkr.play(sfx_list[1], False)
                 continue
 
             if confirm_mode:
@@ -70,8 +82,9 @@ def main():
                     confirm_mode = False
                     print("beer mode")
                     GPIO.output(motor_pin, GPIO.HIGH)
-                    # Sleep for the amount of time necessary to dispense beverage
-                    # time.sleep(10)
+                    # sleep for the amount of time necessary to dispense beverage
+                    time.sleep(1)
+                    GPIO.output(motor_pin, GPIO.LOW)
                     continue
 
                 elif "monkey" in tokens:
@@ -92,9 +105,12 @@ def main():
             break
 
     print("--- Cleanup ---")
+    tray.teardown()
     mic.teardown()
     spkr.teardown()
     intp.teardown()
+    GPIO.output(motor_pin, GPIO.LOW)
+    GPIO.cleanup()
     print("--- Program Shutdown ---")
 
 if __name__ == "__main__":
